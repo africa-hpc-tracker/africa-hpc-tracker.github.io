@@ -147,7 +147,6 @@ PyCRS==1.0.2
 pydantic==2.11.9
 pydantic_core==2.33.2
 Pygments==2.19.2
-pyobjc-framework-Cocoa==11.0
 pyogrio==0.10.0
 pyparsing==3.2.5
 pyproj==3.7.1
