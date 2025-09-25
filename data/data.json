@@ -1,0 +1,115 @@
+[{
+  "name": "Taouey",
+  "location": {
+    "country": "Senegal",
+    "CN": "SEN",
+    "city": "Diamniadio",
+    "coordinates": {"lat": 14.70721512041391, "lng": -17.419260299665588},
+    "region": "West",
+    "address": "Cité du Savoir, Diamniadio, Dakar"
+
+  },
+  "type": "National HPC",
+  "status": "Live",
+  "capacity": {
+    "GPU_type": "V100", 
+    "n_GPUs": 48,
+    "pflops_performance": 0.5376
+  },
+  "contact_info": {
+    "website": "https://cineri.sn/"
+  },
+  "last_update": "2019"
+},
+{
+  "name": "Toubkal (GPU Cluster)",
+  "location": {
+    "country": "Morocco",
+    "CN": "MAR",
+    "city": "Ben Guerir",
+    "coordinates": {"lat": 32.217507573027476, "lng": -7.938512605642216},
+    "region": "North",
+    "address": "Mohammed VI Polytechnic University, Ben Guerir 43150"
+  },
+  "type": "National HPC",
+  "status": "Live",
+  "capacity": {
+    "GPU_type": "A100",
+    "n_GPUs": 20,
+    "pflops_performance": 6.24
+  },
+  "contact_info": {
+    "website": "https://toubkal.um6p.ma/"
+  },
+  "last_update": "2021"
+},
+{
+  "name": "CNCCI",
+  "location": {
+    "country": "Côte d'Ivoire",
+    "city": "Abidjan",
+    "CN": "CIV",
+    "coordinates": {"lat": 5.358842210111155, "lng": -3.902231013281939},
+    "region": "West",
+    "address": "Pôle Scientifique et d'Innovation de Bingerville (PSI), Abidjan"
+
+  },
+  "type": "National HPC",
+  "status": "Live",
+  "capacity": {
+    "GPU_type": "K80",
+    "n_GPUs": 24,
+    "pflops_performance": 0.3226
+  },
+  "contact_info": {
+    "website": "https://cncci.edu.ci/cncci/"
+  },
+  "last_update": "2018"
+},
+{
+  "name": "Lengau",
+  "location": {
+    "country": "South Africa",
+    "CN": "ZAF",
+    "city": "Cape Town",
+    "coordinates": {"lat": -33.92584, "lng": 18.42322},
+    "region": "South",
+    "address": "CSIR Campus, 15 Lower Hope Street, Rosebank, Cape Town"
+
+  },
+  "type": "National HPC",
+  "status": "Live",
+  "capacity": {
+    "GPU_type": "V100",
+    "n_GPUs": 36,
+    "pflops_performance": 1.029
+  },
+  "contact_info": {
+    "website": "https://www.chpc.ac.za/"
+  },
+  "last_update": "2016"
+},
+{
+  "name": "DGX A100",
+  "location": {
+    "country": "Tunisia",
+    "city": "Tunis",
+    "CN": "TUN",
+    "coordinates": {"lat": 36.89913191678015, "lng": 10.18927862098627},
+    "region": "North",
+    "address": "ESPRIT School of Business, Campus ESB Lot N°46, Z.I Chotrana II, 2088, Ariana"
+
+  },
+  "type": "Private Workstation",
+  "status": "Live",
+  "capacity": {
+    "GPU_type": "A100",
+    "n_GPUs": 8,
+    "pflops_performance": 5
+  },
+  "contact_info": {
+    "website": "https://www.esb.tn/en"
+  },
+  "last_update": "2024"
+}
+]
