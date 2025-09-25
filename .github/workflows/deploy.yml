@@ -1,0 +1,28 @@
+name: Deploy Flask App
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Use a fresh Ubuntu runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Get your repository's code
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9' # Specify your Python version
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+
+      - run: python3 src/tracker.py
