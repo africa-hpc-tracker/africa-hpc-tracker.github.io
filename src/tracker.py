@@ -1,5 +1,7 @@
 from config import Config as cfg
 
+# import dash_daq as daq
+
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
@@ -27,13 +29,17 @@ def get_info(idx:int, df):
     gpu_type    = df.loc[idx, "capacity_GPU_type"]
     addr        = df.loc[idx, "location_address"]
     last_update = df.loc[idx, "last_update"]
-    
+    capacity    = df.loc[idx, "capacity_pflops_performance"]
+    url    = df.loc[idx, "contact_info_website"]
     info = dcc.Markdown(
         f""" 
-            {name} - {str(n_gpus)}x{gpu_type}
-            {addr}
             {country} 
+            {name} - **{str(n_gpus)}x{gpu_type}**
+            Overall Performance: **{capacity} petaFLOPS**
+
+            {addr}
             ({last_update})
+            Website: {url}
         """,
         style={"white-space": "pre"}
         )
@@ -50,7 +56,7 @@ fig = go.Figure(data=go.Choropleth(
     zmax=10,
     zmin=0,
     locationmode = 'ISO-3',
-    colorscale = 'sunset',
+    colorscale = 'reds',
     # text=df["info"],
     colorbar=dict(
             title='Compute capability (petaFLOPS)', # Title for your colorbar
@@ -61,13 +67,16 @@ fig = go.Figure(data=go.Choropleth(
 
 fig.update_layout(
     geo_scope='africa',
-    height=600,
+    height=500,
     #margin={"r": 0, "t": 0, "l": 0, "b": 0},
     margin={"r": 0, "t": 0, "b": 0},
-    autosize=True
+    autosize=True,
+    # paper_bgcolor='beige' # Background color of the entire figure
+    dragmode=False
+
 )
 fig.update_geos(
-    landcolor="beige",  # Sets the color of land areas
+    landcolor="white",  # Sets the color of land areas
     oceancolor="lightblue", # Sets the color of ocean areas
     subunitcolor="darkgray", # Sets the color of country subdivisions
     lakecolor="lightblue",      # Set lake color to blue
@@ -78,29 +87,41 @@ fig.update_geos(
     showocean=True,
     showsubunits=True,
     resolution=50,
-
 )
     
-# app
+# App
 
 external_stylesheets = ["https://fonts.googleapis.com/css2?family=Tahoma&display=swap"]
 app = dash.Dash("Africa HPC Tracker", external_stylesheets=external_stylesheets)
 
-app.layout = html.Div(children=[
-    html.H1(
-        children='Africa HPC Tracker',
-        style={'textAlign': 'center', 'font-family': 'Arial, sans-serif'}
-    ),
-    html.Div(
-        id='hover-info', 
-        style={'textAlign': 'center', 'font-family': 'Arial, sans-serif'}
-    ),
-    dcc.Graph(
-        id='hpc-tracker',
-        figure=fig
-    ),
+TITLE_COLOR = "#095C73"
+DETAILS_COLOR = "#0F718E"
 
-])
+app.layout = html.Div(
+    id="parent_div",
+    children=[
+        html.H1(
+            id='header-text',
+            children='Africa HPC Tracker',
+            style={'color':TITLE_COLOR}
+        ),
+        html.Div(
+            id='hover-info',
+            style={'color':DETAILS_COLOR}
+        ),
+        dcc.Graph(
+            id='hpc-tracker',
+            figure=fig            
+        ),
+
+    ],
+    style={
+        'textAlign'     : 'center', 
+        'font-family'   : 'Arial, sans-serif',
+    }
+)
+
+# Callbacks
 
 @app.callback(
     Output('hover-info', 'children'),
@@ -114,5 +135,4 @@ def display_hover_data(hoverData):
     return "Hover over a region to display the details"
 
 if __name__ == '__main__':
-    # fig.show()
-    app.run(debug=True)
+    app.run(debug=False,dev_tools_ui=False)
