@@ -1,3 +1,5 @@
+import argparse
+
 from config import Config as cfg
 
 # import dash_daq as daq
@@ -8,11 +10,18 @@ from dash.dependencies import Input, Output
 
 import json 
 
+import logging
+logging.basicConfig(level="INFO")
+
 import pandas as pd
 
 import plotly.graph_objects as go
 
 from utils import flatten_json
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--deploy", "-d", required=bool, default=False)
 
 # Load data
 with open(cfg.data_path, "r") as f:
@@ -135,4 +144,20 @@ def display_hover_data(hoverData):
     return "Hover over a region to display the details"
 
 if __name__ == '__main__':
-    app.run(debug=False,dev_tools_ui=False)
+    args = parser.parse_args()
+
+    on_prod = args.deploy
+    logging.info(on_prod)
+
+    if on_prod==True:
+        logging.info("On Air")
+        from waitress import serve
+        serve(app, host="0.0.0.0", port=8050)
+    else:
+        logging.info("On earth")
+        app.run(
+            host="0.0.0.0", 
+            port=8050,
+            debug=True,
+            dev_tools_ui=True
+        )
