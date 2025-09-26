@@ -1,5 +1,6 @@
 .DS_STORE
 notebooks/
+africa-hpc-tracker/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

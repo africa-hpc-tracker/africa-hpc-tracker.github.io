@@ -34,9 +34,8 @@ def get_info(idx:int, df):
             {country} 
             {name} - **{str(n_gpus)}x{gpu_type}**
             Overall Performance: **{capacity} petaFLOPS**
-
-            {addr}
             ({last_update})
+            {addr}
             Website: {url}
         """,
         style={"white-space": "pre"}
@@ -65,7 +64,7 @@ fig = go.Figure(data=go.Choropleth(
 
 fig.update_layout(
     geo_scope='africa',
-    height=500,
+    height=400,
     #margin={"r": 0, "t": 0, "l": 0, "b": 0},
     margin={"r": 0, "t": 0, "b": 0},
     autosize=True,
@@ -88,7 +87,6 @@ fig.update_geos(
 )
     
 # App
-
 external_stylesheets = ["https://fonts.googleapis.com/css2?family=Tahoma&display=swap"]
 app = dash.Dash("Africa HPC Tracker", external_stylesheets=external_stylesheets)
 server = app.server
