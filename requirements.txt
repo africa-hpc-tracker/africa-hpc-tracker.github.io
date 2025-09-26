@@ -3,3 +3,5 @@ plotly
 pandas
 uvicorn
 huggingface_hub
+fastapi
+python-multipart
