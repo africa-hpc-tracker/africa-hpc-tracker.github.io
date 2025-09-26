@@ -6,7 +6,6 @@ on:
   # to run this workflow manually from the Actions tab
   workflow_dispatch:
     
-
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
@@ -18,4 +17,6 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://dric2018:$HF_TOKEN@https://huggingface.co/spaces/dric2018/africa-hpc-tracker main
+        run: |
+          pip install huggingface_hub
+          git push https://dric2018:$HF_TOKEN@huggingface.co/spaces/dric2018/africa-hpc-tracker main

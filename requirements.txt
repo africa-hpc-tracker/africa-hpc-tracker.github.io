@@ -2,3 +2,4 @@ dash
 plotly
 pandas
 gunicorn
+huggingface_hub
