@@ -1,8 +1,4 @@
-import argparse
-
 from config import Config as cfg
-
-# import dash_daq as daq
 
 import dash
 from dash import dcc, html
@@ -10,18 +6,11 @@ from dash.dependencies import Input, Output
 
 import json 
 
-import logging
-logging.basicConfig(level="INFO")
-
 import pandas as pd
 
 import plotly.graph_objects as go
 
 from utils import flatten_json
-
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--deploy", "-d", required=bool, default=False)
 
 # Load data
 with open(cfg.data_path, "r") as f:
@@ -90,7 +79,7 @@ fig.update_geos(
     subunitcolor="darkgray", # Sets the color of country subdivisions
     lakecolor="lightblue",      # Set lake color to blue
     rivercolor="lightblue",
-    showlakes=True,        # Make lakes visible
+    showlakes=True,        
     showrivers=True,        # Make lakes visible
     showland=True,
     showocean=True,
@@ -102,6 +91,7 @@ fig.update_geos(
 
 external_stylesheets = ["https://fonts.googleapis.com/css2?family=Tahoma&display=swap"]
 app = dash.Dash("Africa HPC Tracker", external_stylesheets=external_stylesheets)
+server = app.server
 
 TITLE_COLOR = "#095C73"
 DETAILS_COLOR = "#0F718E"
@@ -144,20 +134,9 @@ def display_hover_data(hoverData):
     return "Hover over a region to display the details"
 
 if __name__ == '__main__':
-    args = parser.parse_args()
-
-    on_prod = args.deploy
-    logging.info(on_prod)
-
-    if on_prod==True:
-        logging.info("On Air")
-        from waitress import serve
-        serve(app, host="0.0.0.0", port=8050)
-    else:
-        logging.info("On earth")
-        app.run(
-            host="0.0.0.0", 
-            port=8050,
-            debug=True,
-            dev_tools_ui=True
-        )
+    app.run(
+        host=cfg.HOST, 
+        port=cfg.PORT,
+        debug=cfg.IS_DEBUG,
+        dev_tools_ui=cfg.IS_DEBUG
+    )
